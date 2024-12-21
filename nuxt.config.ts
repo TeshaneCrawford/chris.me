@@ -2,10 +2,12 @@ export default defineNuxtConfig({
   devServer: {
     port: 1111,
   },
+
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',
-    // '@nuxt/content',
+    '@nuxt/content',
+    '@nuxtjs/color-mode',
     // '@vite-pwa/nuxt',
   ],
 
@@ -14,27 +16,36 @@ export default defineNuxtConfig({
     renderJsonPayloads: true,
   },
 
+  colorMode: {
+    preference: 'system',
+    fallback: 'dark',
+    classSuffix: '',
+  },
+
   css: [
-    '~/styles/fonts.css',
-    '~/styles/main.css',
     '~/styles/vars.css',
+    '~/styles/fonts.css',
+    '~/styles/prose.css',
+    '~/styles/main.css',
   ],
 
-  // content: {
-  //   highlight: {
-  //     theme: 'vitesse-dark',
-  //   },
-  //   markdown: {
-  //     toc: {
-  //       depth: 3,
-  //     },
-  //   },
-  //   documentDriven: true,
-  // },
+  content: {
+    build: {
+      markdown: {
+        toc: {
+          depth: 3,
+          searchDepth: 3,
+        },
+        highlight: {
+          theme: {
+            default: 'vitesse-dark',
+            light: 'vitesse-light',
+          },
+        },
+      },
+    },
 
-  // app: {
-  //   keepalive: true,
-  // },
+  },
 
   vite: {
     define: {
@@ -59,5 +70,8 @@ export default defineNuxtConfig({
     },
   },
 
+  future: {
+    compatibilityVersion: 4,
+  },
   compatibilityDate: '2024-09-05',
 })
